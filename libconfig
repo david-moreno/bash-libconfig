@@ -1,0 +1,50 @@
+[[ -z $cfg_version ]] && {
+cfg_version="1.0"
+
+function cfg_exists {
+	[[ -f "${!1}" ]] && echo 1 || echo 0
+}
+
+function cfg_isset {
+	[[ -z ${!1} ]] && echo 0 || echo 1
+}
+
+function cfg_isnum {
+	[[ ! `echo "${!1}" | grep '^[0-9]*$'` ]] && echo 0 || echo 1
+}
+
+function cfg_isint {
+	[[ ! `echo "${!1}" | grep '^[-+]?[0-9]+$'` ]] && echo 0 || echo 1
+}
+
+function cfg_isfloat {
+	[[ ! `echo "${!1}" | grep '^[-+]?[0-9]*\.?[0-9]+$'` ]] && echo 0 || echo 1
+}
+
+function cfg_exit_on_no_conf {
+	[[ ! -f ${!1} ]] && {
+		echo "FATAL: '${!1}' does not exists"
+		exit
+	}
+}
+
+function cfg_warn_on_no_conf {
+	[[ ! -f ${!1} ]] && {
+		echo "WARNING: '${!1}' does not exists"
+	}
+}
+
+function cfg_exit_on_unset {
+	[[ -z ${!1} ]] && {
+		echo "FATAL: '$1' is not set"
+		exit
+	}
+}
+
+function cfg_warn_on_unset {
+	[[ -z ${!1} ]] && {
+		echo "WARNING: '$1' is not set"
+	}
+}
+
+} #Guard end.
