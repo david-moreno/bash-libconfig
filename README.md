@@ -65,7 +65,7 @@ We can include it into our script in this way:
 #!/bin/bash
 
 #Includes the library into the script
-source "libconfig"
+source "/usr/lib/bash/libconfig"
 
 #If the config file exists, include it
 config="test.conf"
